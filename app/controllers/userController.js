@@ -27,4 +27,9 @@ router.post('/login', (req,res) => {
     res.send(err)
   })
 })
+
+// router.delete('/logout',authenticationUser,function(req,res){
+//   const {user,token} = req
+//   User.findByIdAndUpdate(user._id,{$pull:{tokens:{token:token}}})
+// })
 module.exports = router

@@ -38,7 +38,11 @@ const userSchema = new Schema({
       type:Date,
       default:Date.now
     }
-  }]
+  }],
+  isAdmin: {
+    type:Boolean,
+    default:false
+  }
 })
 
 userSchema.pre('save', function(next) {
@@ -66,14 +70,14 @@ userSchema.statics.findByCredentials = function(email,password){
   return User.findOne({email})
   .then(function(user){
     if(!user){
-      return Promise.reject({errors:'invalid email/password'})
+      return Promise.reject({errors:'invalid email'})
     }
     return bcryptjs.compare(password, user.password)
       .then(result => {
         if(result){
           return Promise.resolve(user)
         }else{
-          return Promise.reject({ errors: 'invalid email/password' })
+          return Promise.reject({ errors: 'invalid password' })
         }
       })
       .catch(err => {
@@ -90,11 +94,11 @@ userSchema.statics.findByCredentials = function(email,password){
 userSchema.methods.generateToken = function(){
   const user = this
   const tokenData = {
-    _id:user._id,
-    name:user.name, 
-    createdAt:Number(new Data())
+    _id: user._id,
+    name: user.name,
+    createdAt: Number(new Date())
   }
-  const token = jwt.sign(tokenData, 'vinay427@')
+  const token = jwt.sign(tokenData, 'vinay@427')
   user.tokens.push({token})
 
   return user.save()
