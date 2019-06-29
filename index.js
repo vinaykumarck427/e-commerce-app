@@ -4,6 +4,7 @@ const router = require('./app/controllers/userController')
 
 const app = express()
 const port = 3005
+app.use(express.json())
 
 app.use('/users',router)
 
