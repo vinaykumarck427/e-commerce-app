@@ -14,4 +14,22 @@ router.post('/register', (req,res) => {
     })
 })
 
+router.post('/login', (req,res) => {
+  const body = req.body
+  User.findByCredentials(body.email, body.password)
+  .then(user => {
+    return user.generateToken()
+  })
+  .then(token => {
+    res.send({token:token})
+  })
+  .catch(err => {
+    res.send(err)
+  })
+})
+
+// router.delete('/logout',authenticationUser,function(req,res){
+//   const {user,token} = req
+//   User.findByIdAndUpdate(user._id,{$pull:{tokens:{token:token}}})
+// })
 module.exports = router
