@@ -1,6 +1,7 @@
 const express = require('express')
 const router = express.Router()
 const User = require('../models/user')
+const authenticationUser = require('../middlewares/authinticationUser')
 
 router.post('/register', (req,res) => {
   const body =  req.body
@@ -28,8 +29,15 @@ router.post('/login', (req,res) => {
   })
 })
 
-// router.delete('/logout',authenticationUser,function(req,res){
-//   const {user,token} = req
-//   User.findByIdAndUpdate(user._id,{$pull:{tokens:{token:token}}})
-// })
+router.delete('/logout',authenticationUser,function(req,res){
+  const {user,token} = req
+  console.log('in router',token)
+  User.findByIdAndUpdate(user._id,{$pull:{tokens:{token:token}}})
+  .then(() => {
+    res.json({notice:'successfully logged out'})
+  })
+  .catch(err => {
+    res.send(err)
+  })
+})
 module.exports = router
