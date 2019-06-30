@@ -2,6 +2,7 @@ const express = require('express')
 const router = express.Router()
 const User = require('../models/user')
 const authenticationUser = require('../middlewares/authinticationUser')
+const  _ = require('lodash')
 
 router.post('/register', (req,res) => {
   const body =  req.body
@@ -39,5 +40,10 @@ router.delete('/logout',authenticationUser,function(req,res){
   .catch(err => {
     res.send(err)
   })
+})
+
+router.get('/account', authenticationUser, function (req, res) {
+  const { user } = req
+  res.send(_.pick(user, ['_id', 'name',  'email']))
 })
 module.exports = router
