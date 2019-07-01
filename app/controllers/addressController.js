@@ -16,18 +16,18 @@ router.post('/',authenticationUser,(req,res) => {
                     res.send(err)
           })
 })
-router.get('/',authenticationUser,(req,res) => {
-          const {user} = req
-          Address.find({
-                    user:user._id
-          })
-          .then(addressess => {
-                    res.json(addressess)
-          })
-          .catch(err => {
-                    res.send(err)
-          })
-})
+// router.get('/',authenticationUser,(req,res) => {
+//           const {user} = req
+//           Address.find({
+//                     user:user._id
+//           })
+//           .then(addressess => {
+//                     res.json(addressess)
+//           })
+//           .catch(err => {
+//                     res.send(err)
+//           })
+// })
 
 
 module.exports = router
