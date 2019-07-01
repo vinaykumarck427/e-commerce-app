@@ -17,4 +17,32 @@ router.post('/',authenticationUser,(req,res) => {
           })
 })
 
+router.get('/', authenticationUser, (req, res) => {
+          const { user } = req
+          Address.find({
+                    user: user._id
+          })
+                    .then(addressess => {
+                              res.json(addressess)
+                    })
+                    .catch(err => {
+                              res.send(err)
+                    })
+})
+router.put('/:id', authenticationUser,(req,res) => {
+          const { user } = req
+          const id = req.params.id
+          const body = req.body
+          Address.findOneAndUpdate({
+                    _id:id,
+                    user:user._id
+          }, {$set:body}, {new:true})
+          .then(address => {
+                    res.json(address)
+          })
+          .catch(err => {
+                    res.send(err)
+          })
+})
+
 module.exports = router
