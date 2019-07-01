@@ -29,4 +29,16 @@ router.post('/', authenticationUser, authenticateUser,(req,res) => {
           })
 })
 
+router.get('/:id', authenticationUser, authenticateUser,(req,res) => {
+          const id = req.params.id
+          Category.findById(id)
+          .then(category => {
+                    res.json(category)
+          })
+          .catch(err => {
+                    res.send(err)
+          })
+})
+
+
 module.exports = router
