@@ -5,7 +5,7 @@ const authenticateUser = require('../middlewares/authenticateUser')
 const _ = require('lodash')
 
 const router = express.Router()
-router.get('/', authenticationUser, authenticateUser,(req,res)=> {
+router.get('/',(req,res)=> {
           const {user} = req
           Category.find()
           .then(categories => {
@@ -40,5 +40,15 @@ router.get('/:id', authenticationUser, authenticateUser,(req,res) => {
           })
 })
 
+router.delete('/:id', authenticationUser, authenticateUser,(req,res) => {
+          const id = req.params.id
+          Category.findByIdAndDelete(id)
+          .then(category => {
+                    res.json(category)
+          })
+          .catch(err => {
+                    res.send(err)
+          })
+})
 
 module.exports = router
