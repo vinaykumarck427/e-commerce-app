@@ -4,7 +4,7 @@ const mongoose = require('mongoose')
 const Schema = mongoose.Schema
 
 const addressSchema = new Schema({
-          type: {
+          addresstype: {
                     type:String
           },
           street: {
@@ -27,21 +27,6 @@ const addressSchema = new Schema({
           }
 })
 
-// addressSchema.pre('save', function(next) {
-//           const address = this
-//           console.log(user._id)
-//           console.log(address)
-//           next()
-// })
-
 const Address = mongoose.model('Address',addressSchema)
 
 module.exports = Address
-
-// _id
-//           - type
-//           - street
-//           - city
-//           - pin
-//           - landmark
-//           - userId
