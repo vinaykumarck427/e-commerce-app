@@ -29,5 +29,20 @@ router.get('/', authenticationUser, (req, res) => {
                               res.send(err)
                     })
 })
+router.put('/:id', authenticationUser,(req,res) => {
+          const { user } = req
+          const id = req.params.id
+          const body = req.body
+          Address.findOneAndUpdate({
+                    _id:id,
+                    user:user._id
+          }, {$set:body}, {new:true})
+          .then(address => {
+                    res.json(address)
+          })
+          .catch(err => {
+                    res.send(err)
+          })
+})
 
 module.exports = router

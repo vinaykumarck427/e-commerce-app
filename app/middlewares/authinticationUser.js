@@ -4,7 +4,6 @@ const authenticationUser =  function(req,res,next){
           const token = req.header('x-auth')
           User.findByToken(token)
           .then(user => {
-                    console.log()
                     if(user){
                               req.user = user
                               req.token = token
