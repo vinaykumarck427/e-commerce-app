@@ -51,4 +51,16 @@ router.delete('/:id', authenticationUser, authenticateUser,(req,res) => {
           })
 })
 
+router.put('/:id', authenticationUser, authenticateUser ,(req,res) => {
+          const id = req.params.id
+          const body = req.body
+          Category.findByIdAndUpdate(id,{$set:body},{new:true})
+          .then(category => {
+                    res.json(category)
+          })
+          .catch(err => {
+                    res.send(err)
+          })
+})
+
 module.exports = router
