@@ -44,6 +44,6 @@ router.delete('/logout',authenticationUser,function(req,res){
 
 router.get('/account', authenticationUser, function (req, res) {
   const { user } = req
-  res.send(_.pick(user, ['_id', 'name',  'email']))
+  res.send(_.pick(user, ['_id', 'name', 'email']))
 })
 module.exports = router

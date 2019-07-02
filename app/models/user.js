@@ -52,7 +52,7 @@ userSchema.pre('save', function(next) {
     bcryptjs.genSalt(10)
     .then(function(salt){
       bcryptjs.hash(user.password,salt)
-      .then(function(encryptedPassword) {
+      .then(function(encryptedPassword){
         console.log(encryptedPassword)
         user.password = encryptedPassword
         next()
