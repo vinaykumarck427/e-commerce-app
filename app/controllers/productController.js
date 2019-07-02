@@ -28,16 +28,39 @@ router.get('/', authenticationUser, authenticateUser,(req,res) => {
           })
 })
 
-router.get('/:id', (req,res) => {
+router.get('/:id', authenticationUser, authenticateUser,(req,res) => {
           const id = req.params.id
           Product.findById(id).populate('category', ['_id', 'name'])
           .then(product => {
-                    res.send(_.pick(product, ['productname', 'productprice', 'description', 'imgurl', 'category']))
+                    res.send(_.pick(product, ['_id','productname', 'productprice', 'description', 'imgurl', 'category']))
           })
           .catch(err => {
                     res.send(err)
           })
 })
+
+router.put('/:id', authenticationUser, authenticateUser, (req,res) => {
+          const id = req.params.id
+          const body = req.body
+          Product.findByIdAndUpdate(id,{$set:body},{new:true}).populate('category', ['_id', 'name'])
+          .then(product => {
+                    res.send(_.pick(product, ['_id','productname', 'productprice', 'description', 'imgurl', 'category']))
+          })
+          .catch(err => {
+                    res.send(err)
+          })
+})
+
+// router.delete('/:id',(req,res) => {
+//           const id = req.params.id
+//           Product.findByIdAndDelete(id)
+//           .then(product => {
+//                     res.json(product)
+//           })
+//           .catch(err => {
+//                     res.send(err)
+//           })
+// })
 
 
 
