@@ -43,4 +43,19 @@ router.get('/:id', authenticationUser,(req,res) => {
                     res.send(err)
           })
 })
+
+router.put('/:id', authenticationUser,(req,res) => {
+          const id = req.params.id
+          const {user} = req
+          CartItem.findOneAndUpdate({
+                    _id:id,
+                    user:user._id
+          }, { $set: req.body }, { new: true }).populate('product', ['_id', 'productname', 'productprice', 'description', 'imgurl'])
+          .then(cartItem => {
+                    res.send(_.pick(cartItem, ['product', 'quantity']))
+          })
+          .catch(err => {
+                    res.send(err)
+          })
+})
 module.exports = router
