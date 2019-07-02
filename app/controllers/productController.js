@@ -51,17 +51,15 @@ router.put('/:id', authenticationUser, authenticateUser, (req,res) => {
           })
 })
 
-// router.delete('/:id',(req,res) => {
-//           const id = req.params.id
-//           Product.findByIdAndDelete(id)
-//           .then(product => {
-//                     res.json(product)
-//           })
-//           .catch(err => {
-//                     res.send(err)
-//           })
-// })
-
-
+router.delete('/:id', authenticationUser, authenticateUser,(req,res) => {
+          const id = req.params.id
+          Product.findByIdAndDelete(id)
+          .then(product => {
+                    res.json(product)
+          })
+          .catch(err => {
+                    res.send(err)
+          })
+})
 
 module.exports = router
