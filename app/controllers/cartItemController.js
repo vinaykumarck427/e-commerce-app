@@ -1,5 +1,6 @@
 const express = require('express')
 const router = express.Router()
+const _ = require('lodash')
 
 const CartItem = require('../models/cart-item')
 const authenticationUser = require('../middlewares/authinticationUser')
@@ -28,5 +29,18 @@ router.get('/',authenticationUser,(req,res)=> {
           })
 })
 
-// router.
+router.get('/:id', authenticationUser,(req,res) => {
+          const {user} = req
+          const id = req.params.id
+          CartItem.findOne({
+                    _id:id,
+                    user:user._id
+          }).populate('product', ['_id', 'productname', 'productprice', 'description', 'imgurl'])
+          .then(cartItem => {
+                    res.send(_.pick(cartItem, ['product','quantity']))
+          })
+          .catch(err => {
+                    res.send(err)
+          })
+})
 module.exports = router
