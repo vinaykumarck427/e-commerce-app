@@ -9,6 +9,7 @@ router.post('/', authenticationUser,(req,res) => {
           const {user} = req
           const review = new Review(req.body)
           review.user = user._id
+          review.product = req.query.productId
           review.save()
           .then(review => {
                     res.json(review)
