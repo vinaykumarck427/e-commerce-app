@@ -7,6 +7,8 @@ const addressRouter =  require('./app/controllers/addressController')
 const categoryRouter = require('./app/controllers/categoryController')
 const productRouter = require('./app/controllers/productController')
 const reviewRouter = require('./app/controllers/reviewController')
+const cartItemRouter = require('./app/controllers/cartItemController')
+
 const app = express()
 const port = 3005
 app.use(express.json())
@@ -16,6 +18,7 @@ app.use('/address', addressRouter)
 app.use('/categories',categoryRouter)
 app.use('/products', productRouter)
 app.use('/reviews', reviewRouter)
+app.use('/cartitems', cartItemRouter)
 
 
 app.listen(port, () => {
