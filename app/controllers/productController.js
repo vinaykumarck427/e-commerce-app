@@ -28,7 +28,17 @@ router.get('/', authenticationUser, authenticateUser,(req,res) => {
           })
 })
 
-// router.
+router.get('/:id', (req,res) => {
+          const id = req.params.id
+          Product.findById(id).populate('category', ['_id', 'name'])
+          .then(product => {
+                    res.send(_.pick(product, ['productname', 'productprice', 'description', 'imgurl', 'category']))
+          })
+          .catch(err => {
+                    res.send(err)
+          })
+})
+
 
 
 module.exports = router
