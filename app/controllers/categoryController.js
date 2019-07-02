@@ -1,6 +1,6 @@
 const express = require('express')
 const Category = require('../models/category')
-const authenticationUser = require('../middlewares/authinticationUser')
+const authenticationUser = require('../middlewares/authenticationUser')
 const authenticateUser = require('../middlewares/authenticateUser')
 const _ = require('lodash')
 

@@ -1,7 +1,7 @@
 const express = require('express')
 const router = express.Router()
 const User = require('../models/user')
-const authenticationUser = require('../middlewares/authinticationUser')
+const authenticationUser = require('../middlewares/authenticationUser')
 const  _ = require('lodash')
 
 router.post('/register', (req,res) => {
