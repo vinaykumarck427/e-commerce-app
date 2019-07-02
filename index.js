@@ -10,6 +10,7 @@ const reviewRouter = require('./app/controllers/reviewController')
 const cartItemRouter = require('./app/controllers/cartItemController')
 const wishlistRouter = require('./app/controllers/wishlistController')
 const orderRouter = require('./app/controllers/orderController')
+const orderStatusRouter = require('./app/controllers/orderStatusController')
 
 
 const app = express()
@@ -24,6 +25,8 @@ app.use('/reviews', reviewRouter)
 app.use('/cartitems', cartItemRouter)
 app.use('/wishlists', wishlistRouter)
 app.use('/orders',orderRouter)
+app.use('/orderStatuses', orderStatusRouter)
+
 
 
 
