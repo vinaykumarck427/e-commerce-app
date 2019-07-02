@@ -17,4 +17,16 @@ router.post('/',authenticationUser,(req,res) => {
           })
 })
 
+router.get('/',authenticationUser,(req,res)=> {
+          const {user} = req
+          CartItem.find()
+          .then(cartitems => {
+                    res.json(cartitems)
+          })
+          .then(err => {
+                    res.send(err)
+          })
+})
+
+// router.
 module.exports = router
