@@ -32,6 +32,28 @@ router.get('/',(req,res) => {
                     })
 })
 
+router.get('/:id',(req,res) => {
+          const id = req.params.id
+          OrderStatus.findById(id).populate('order', ['orderCode'])
+          .then(orderStatus => {
+                    res.json(orderStatus)
+          })
+          .catch(err => {
+                    res.send(err)
+          })
+})
 
+// router.get('/:id', (req, res) => {
+//           const id = req.params.id
+//           OrderStatus.findOne({
+//                     order: id
+//           }).populate('order', ['orderCode'])
+//                     .then(orderStatus => {
+//                               res.json(orderStatus)
+//                     })
+//                     .catch(err => {
+//                               res.send(err)
+//                     })
+// })
 
 module.exports = router
