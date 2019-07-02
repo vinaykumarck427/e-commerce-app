@@ -6,12 +6,12 @@ const _ = require('lodash')
 const authenticationUser = require('../middlewares/authinticationUser')
 const authenticateUser = require('../middlewares/authenticateUser')
 
-router.post('/',authenticationUser,authenticateUser,(req,res) => {
+router.post('/', authenticationUser, authenticateUser,(req,res) => {
           const body = req.body
           const product = new Product(body)
           product.save()
           .then(product => {
-                    res.json(_.pick(product,['productname', 'productprice','description','imgurl','category']))
+                    res.json(_.pick(product,['_id','productname', 'productprice','description','imgurl','category']))
           })
           .catch(err => {
                     res.send(err)
