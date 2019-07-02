@@ -43,17 +43,17 @@ router.get('/:id',(req,res) => {
           })
 })
 
-// router.get('/:id', (req, res) => {
-//           const id = req.params.id
-//           OrderStatus.findOne({
-//                     order: id
-//           }).populate('order', ['orderCode'])
-//                     .then(orderStatus => {
-//                               res.json(orderStatus)
-//                     })
-//                     .catch(err => {
-//                               res.send(err)
-//                     })
-// })
+router.put('/:id', authenticationUser, authenticateUser,(req, res) => {
+          const id = req.params.id
+          OrderStatus.findByIdAndUpdate(id,{$set:req.body},{new:true}).populate('order', ['orderCode'])
+                    .then(orderStatus => {
+                              res.json(orderStatus)
+                    })
+                    .catch(err => {
+                              res.send(err)
+                    })
+})
+
+// router.delete()
 
 module.exports = router
