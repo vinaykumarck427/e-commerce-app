@@ -58,5 +58,19 @@ router.put('/:id',authenticationUser,(req,res) => {
                     res.send(err)
           })
  })
- 
+
+router.delete('/:id', authenticationUser, (req, res) => {
+          const { user } = req
+          const id = req.params.id
+          Wishlist.findOneAndDelete({
+                    _id: id,
+                    user: user._id
+          }).populate('product', ['_id', 'productname', 'productprice', 'description', 'imgurl']).populate('user', ['_id', 'name'])
+                    .then(wishlist => {
+                              res.send(_.pick(wishlist, ['user', 'product']))
+                    })
+                    .catch(err => {
+                              res.send(err)
+                    })
+})
 module.exports = router
