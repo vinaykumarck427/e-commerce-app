@@ -39,6 +39,23 @@ router.get('/:id',(req,res) => {
           })
 })
 
+router.put('/:id',authenticationUser,(req,res) => {
+          const id =  req.params.id
+          const {user} = req
+          Review.findOneAndUpdate({
+                    _id:id,
+                    user:user._id
+          },{$set:req.body},{new:true}).populate('user', ['_id', 'name'],['_id', 'productname'])
+          .then(review => {
+                    res.json(review)
+          })
+          .catch(err => {
+                    res.send(err)
+          })
+})
+
+// router.delete(':/id')
+
 module.exports = router
 
 // router.get('/',authenticationUser,(req,res) => {
