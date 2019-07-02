@@ -44,4 +44,19 @@ router.get('/:id',authenticationUser,(req,res) => {
                     res.send(err)
           })
 })
+router.put('/:id',authenticationUser,(req,res) => {
+          const {user} = req
+          const id = req.params.id
+          Wishlist.findOneAndUpdate({
+                    _id:id,
+                    user:user._id
+          }, { $set: req.body }, { new: true }).populate('product', ['_id', 'productname', 'productprice', 'description', 'imgurl']).populate('user',['_id','name'])
+          .then(wishlist => {
+                    res.send(_.pick(wishlist,['user','product']))
+          })
+          .catch(err => {
+                    res.send(err)
+          })
+ })
+ 
 module.exports = router
