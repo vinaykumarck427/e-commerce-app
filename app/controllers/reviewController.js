@@ -1,7 +1,9 @@
 const express = require('express')
 const Review = require('../models/review')
 const router = express.Router()
+const _ = require('lodash')
 const authenticationUser = require('../middlewares/authinticationUser')
+
 
 router.post('/', authenticationUser,(req,res) => {
           const {user} = req
@@ -10,6 +12,16 @@ router.post('/', authenticationUser,(req,res) => {
           review.save()
           .then(review => {
                     res.json(review)
+          })
+          .catch(err => {
+                    res.send(err)
+          })
+})
+
+router.get('/',(req,res) => {
+          Review.find()
+          .then(reviews => {
+                    res.json(reviews)
           })
           .catch(err => {
                     res.send(err)
