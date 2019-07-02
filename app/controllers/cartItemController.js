@@ -58,4 +58,19 @@ router.put('/:id', authenticationUser,(req,res) => {
                     res.send(err)
           })
 })
+
+router.delete('/:id',authenticationUser,(req,res) => {
+          const {user} = req
+          const id = req.params.id
+          CartItem.findOneAndDelete({
+                    _id:id,
+                    user:user._id
+          })
+          .then(cartItem => {
+                    res.json(cartItem)
+          })
+          .catch(err => {
+                    res.send(err)
+          })
+})
 module.exports = router
