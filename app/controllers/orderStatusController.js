@@ -54,6 +54,15 @@ router.put('/:id', authenticationUser, authenticateUser,(req, res) => {
                     })
 })
 
-// router.delete()
+router.delete('/:id', authenticationUser, authenticateUser,(req, res) => {
+          const id = req.params.id
+          OrderStatus.findByIdAndDelete(id)
+                    .then(orderStatus => {
+                              res.json(orderStatus)
+                    })
+                    .catch(err => {
+                              res.send(err)
+                    })
+})
 
 module.exports = router
