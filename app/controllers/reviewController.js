@@ -2,7 +2,7 @@ const express = require('express')
 const Review = require('../models/review')
 const router = express.Router()
 const _ = require('lodash')
-const authenticationUser = require('../middlewares/authinticationUser')
+const authenticationUser = require('../middlewares/authenticationUser')
 
 
 router.post('/', authenticationUser,(req,res) => {

@@ -3,7 +3,7 @@ const router = express.Router()
 const _ = require('lodash')
 
 const CartItem = require('../models/cart-item')
-const authenticationUser = require('../middlewares/authinticationUser')
+const authenticationUser = require('../middlewares/authenticationUser')
 
 router.post('/',authenticationUser,(req,res) => {
           const {user} = req

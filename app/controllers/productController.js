@@ -3,7 +3,7 @@ const Product = require('../models/product')
 const router =  express.Router()
 const _ = require('lodash')
 
-const authenticationUser = require('../middlewares/authinticationUser')
+const authenticationUser = require('../middlewares/authenticationUser')
 const authenticateUser = require('../middlewares/authenticateUser')
 
 router.post('/', authenticationUser, authenticateUser,(req,res) => {
@@ -18,7 +18,7 @@ router.post('/', authenticationUser, authenticateUser,(req,res) => {
           })
 })
 
-router.get('/', authenticationUser, authenticateUser,(req,res) => {
+router.get('/', (req,res) => {
           Product.find()
           .then(products => {
                     res.json(products)

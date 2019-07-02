@@ -1,7 +1,7 @@
 const express = require('express')
 const router = express.Router()
 const Address = require('../models/address')
-const authenticationUser = require('../middlewares/authinticationUser')
+const authenticationUser = require('../middlewares/authenticationUser')
 
 router.post('/',authenticationUser,(req,res) => {
           const {user} = req

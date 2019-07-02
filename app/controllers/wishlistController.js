@@ -2,7 +2,7 @@ const express = require('express')
 const router = express.Router()
 const Wishlist = require('../models/wishlist')
 const _ = require('lodash')
-const authenticationUser = require('../middlewares/authinticationUser')
+const authenticationUser = require('../middlewares/authenticationUser')
 
 router.post('/',authenticationUser,(req,res) => {
           const {user} = req
