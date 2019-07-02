@@ -27,6 +27,18 @@ router.get('/',(req,res) => {
                     res.send(err)
           })
 })
+
+router.get('/:id',(req,res) => {
+          const id = req.params.id
+          Review.findById(id).populate('user',['_id','name']).populate('product',['_id','productname'])
+          .then(review => {
+                    res.json(review)
+          })
+          .catch(err => {
+                    res.send(err)
+          })
+})
+
 module.exports = router
 
 // router.get('/',authenticationUser,(req,res) => {
