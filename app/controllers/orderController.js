@@ -39,7 +39,7 @@ router.get('/:id',authenticationUser,(req,res) => {
                     user:user._id
           }).populate('user',['_id','name']).populate('product',['_id','productPrice','description','productName','imgUrl']).populate('address',['street','city','pincode','landmark'])
                     .then(order => {
-                              res.json(_.pick(order, ['user', 'total', 'orderCode', 'address', 'orderLineItem', 'paymentMethod','createdAt']))
+                              res.send(_.pick(order, ['_id','user', 'total', 'orderCode', 'address', 'orderLineItem', 'paymentMethod','createdAt']))
                     })
                     .catch(err => {
                               res.send(err)
