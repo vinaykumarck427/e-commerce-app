@@ -54,7 +54,20 @@ router.put('/:id',authenticationUser,(req,res) => {
           })
 })
 
-// router.delete(':/id')
+router.delete('/:id',authenticationUser,(req,res) => {
+          const id = req.params.id
+          const {user} = req
+          Review.findOneAndDelete({
+                    _id:id,
+                    user:user._id
+          })
+          .then(review => {
+                    res.json(review)
+          })
+          .catch(err => {
+                    res.send(err)
+          })
+})
 
 module.exports = router
 
